@@ -1,127 +1,884 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Suryansh Portfolio — Apple Blue Edition</title>
-  <meta name="description" content="Suryansh — Civil Engineering Student | Portfolio" />
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suryansh - Civil Engineering Student</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        /* --- 1. Global Styles & Apple Blue Theme --- */
+        
+        :root {
+            /* Apple Blue Color Palette (Dark Mode - Default) */
+            --apple-blue: #007aff;
+            --apple-blue-light: #58a6ff;
+            --whatsapp-green: #25D366;
+            
+            --bg-color: #000000;
+            --bg-image: radial-gradient(circle at 10% 10%, rgba(0, 122, 255, 0.15), transparent 30%),
+                        radial-gradient(circle at 90% 80%, rgba(0, 122, 255, 0.15), transparent 30%);
+            --text-color: #f5f5f7;
+            --text-secondary: #8e8e93;
+            
+            /* Glassmorphism Variables */
+            --glass-bg: rgba(28, 28, 30, 0.7); /* Dark glass */
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+            /* Bouncy Animation Timing */
+            --bounce-cubic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        [data-theme="light"] {
+            /* Light Mode Palette */
+            --bg-color: #f5f5f7;
+            --bg-image: radial-gradient(circle at 10% 10%, rgba(0, 122, 255, 0.1), transparent 30%),
+                        radial-gradient(circle at 90% 80%, rgba(0, 122, 255, 0.1), transparent 30%);
+            --text-color: #1d1d1f;
+            --text-secondary: #6e6e73;
+
+            /* Light Glassmorphism */
+            --glass-bg: rgba(242, 242, 247, 0.7); /* Light glass */
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            background-image: var(--bg-image);
+            background-attachment: fixed;
+            background-size: cover;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 6rem 0 2rem;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 3.5rem; line-height: 1.1; }
+        h2 {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        a {
+            color: var(--apple-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--apple-blue-light);
+        }
+
+        /* --- 2. Glassmorphism Helper Class --- */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%); /* Safari support */
+            border: 1px solid var(--glass-border);
+            border-radius: 16px; /* Apple-style rounded corners */
+            box-shadow: var(--glass-shadow);
+            padding: 2rem;
+            transition: transform 0.4s var(--bounce-cubic), box-shadow 0.4s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        /* --- 3. Loader Intro --- */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        #loader h1 {
+            color: var(--text-color);
+            font-size: 2.5rem;
+            opacity: 0;
+            animation: text-reveal 1.5s ease-out forwards;
+        }
+        @keyframes text-reveal {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- 4. Cursor Glow (Desktop Only) --- */
+        #cursor-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--apple-blue) 0%, transparent 60%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            opacity: 0.15;
+            z-index: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* --- 5. Header & Navigation --- */
+        .header {
+            position: fixed;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1100px;
+            z-index: 100;
+            border-radius: 16px;
+            padding: 0; /* Padding will be on the navbar */
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            padding: 0 1.5rem;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s ease, transform 0.3s var(--bounce-cubic);
+            display: inline-block;
+        }
+        .nav-links a:hover {
+            color: var(--text-color);
+            transform: scale(1.1);
+        }
+
+        #theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: transform 0.4s var(--bounce-cubic);
+        }
+        #theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        /* --- 6. Home/Hero Section --- */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 70px; /* Offset for fixed header */
+        }
+        #home .name-header {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+        #home .tagline {
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        /* --- 7. Sections (About, Edu, etc.) --- */
+        #about .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .education-card h3 {
+            color: var(--apple-blue);
+            font-size: 1.75rem;
+        }
+        .education-card p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin: 0.5rem 0;
+        }
+
+        /* --- 8. Skills Section --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+        }
+        .skill-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        .skill-card i {
+            font-size: 3rem;
+            color: var(--apple-blue);
+            margin-bottom: 1rem;
+            transition: transform 0.4s var(--bounce-cubic);
+        }
+        .skill-card:hover i {
+            transform: scale(1.2) rotate(-10deg);
+        }
+        .skill-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        /* --- 9. Projects Section --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .project-card {
+            overflow: hidden;
+            padding: 0; /* Remove padding for image */
+        }
+        .project-card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .project-info {
+            padding: 1.5rem;
+        }
+        .project-info h3 {
+            font-size: 1.5rem;
+            color: var(--apple-blue);
+        }
+
+        /* --- 10. Habits Section --- */
+        .habits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .habit-item {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+        }
+        .habit-item i {
+            font-size: 2rem;
+            color: var(--apple-blue);
+            margin-right: 1.5rem;
+            width: 40px;
+            text-align: center;
+            transition: transform 0.4s var(--bounce-cubic);
+        }
+        .habit-item:hover i {
+            transform: scale(1.2);
+        }
+        .habit-item h3 {
+            font-size: 1.05rem;
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        /* --- 11. Contact Section --- */
+        #contact {
+            text-align: center;
+        }
+        .contact-info {
+            margin: 2rem 0;
+        }
+        .contact-info p {
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+        }
+        .contact-info i {
+            margin-right: 0.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--apple-blue);
+            color: #fff;
+            padding: 0.75rem 1.75rem;
+            border-radius: 50px; /* Pill shape */
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.4s var(--bounce-cubic), box-shadow 0.3s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 122, 255, 0.3);
+        }
+
+        .btn-whatsapp {
+            background: var(--whatsapp-green);
+        }
+        .btn-whatsapp:hover {
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        /* --- 12. Footer Section --- */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+        footer p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* --- 13. Bouncy Scroll Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: opacity 0.8s var(--bounce-cubic), transform 0.8s var(--bounce-cubic);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        /* Staggered animation for grid items */
+        .reveal-child {
+            transition-delay: calc(0.1s * var(--child-index, 1));
+        }
+
+        /* --- 14. Floating Socials (3-dot menu) --- */
+        .floating-socials-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 90;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.75rem;
+        }
+
+        .social-toggle {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            background: var(--apple-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.4);
+            transition: transform 0.3s var(--bounce-cubic), box-shadow 0.3s ease;
+        }
+        .social-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 122, 255, 0.5);
+        }
+
+        .social-icons-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-height: 0; /* Hidden by default */
+            overflow: hidden;
+            transition: max-height 0.4s ease-out; /* Smooth slide up/down */
+        }
+        .social-icons-wrapper.active {
+            max-height: 300px; /* Enough to show all icons */
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            padding: 0; /* Override glass-card padding */
+            border-radius: 50%;
+            opacity: 0;
+            transform: scale(0);
+            transition: opacity 0.3s ease, transform 0.4s var(--bounce-cubic), box-shadow 0.3s ease;
+            box-shadow: var(--glass-shadow); /* Ensure shadow is present */
+        }
+        .social-icons-wrapper.active .social-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Staggered animation for social icons */
+        .social-icons-wrapper.active .social-icon:nth-child(1) { transition-delay: 0.05s; }
+        .social-icons-wrapper.active .social-icon:nth-child(2) { transition-delay: 0.10s; }
+        .social-icons-wrapper.active .social-icon:nth-child(3) { transition-delay: 0.15s; }
+        .social-icons-wrapper.active .social-icon:nth-child(4) { transition-delay: 0.20s; }
+        .social-icons-wrapper.active .social-icon:nth-child(5) { transition-delay: 0.25s; }
+
+        .social-icon:hover {
+            box-shadow: 0 6px 20px 0 rgba(0, 122, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* --- 15. Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            
+            /* Hide cursor glow on mobile */
+            #cursor-glow {
+                display: none;
+            }
+
+            /* Mobile Header */
+            .header {
+                top: 0;
+                width: 100%;
+                border-radius: 0;
+                /* Apply glass directly for mobile nav */
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px) saturate(180%);
+                -webkit-backdrop-filter: blur(20px) saturate(180%);
+                border-bottom: 1px solid var(--glass-border);
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px; /* Below navbar */
+                left: 0;
+                width: 100%;
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px) saturate(180%);
+                -webkit-backdrop-filter: blur(20px) saturate(180%);
+                text-align: center;
+                padding: 1rem 0;
+                border-bottom: 1px solid var(--glass-border);
+                box-shadow: var(--glass-shadow);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+            .nav-links a {
+                font-size: 1.1rem;
+                color: var(--text-color);
+            }
+
+            .menu-toggle {
+                display: block;
+                z-index: 101; /* Above theme toggle */
+            }
+            
+            #theme-toggle {
+                font-size: 1.1rem; /* Make it smaller */
+            }
+            
+            /* Mobile adjustments for floating socials */
+            .floating-socials-container {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                gap: 0.5rem;
+            }
+            .social-toggle, .social-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+        }
+        
+    </style>
 </head>
-<body>
-  <!-- Cursor glow -->
-  <div id="cursorGlow" class="cursor-glow" aria-hidden="true"></div>
-
-  <!-- Loader / Intro -->
-  <div id="introWrap" class="intro-wrap" role="status" aria-live="polite">
-    <div class="intro">
-      <h2>Hi, I'm <strong>Suryansh</strong></h2>
-      <p>Civil Engineering Student — Future Site Engineer</p>
+<body data-theme="dark"> <div id="loader">
+        <h1>Hi, I'm Suryansh</h1>
     </div>
-  </div>
 
-  <div class="wrap">
-    <header class="app-hero">
-      <div class="hero-left">
-        <div class="kicker">Suryansh — Civil Engineering Student</div>
-        <h1 class="title">Suryansh – Civil Engineering Student | Future Site Engineer</h1>
-        <p class="subtitle">Passionate about sustainable construction, structural design, and using AI tools to improve engineering workflows.</p>
-        <div class="cta">
-          <button class="btn" id="contactBtn">Get in Touch</button>
-          <button class="btn" id="whatsappBtn">WhatsApp</button>
-          <button class="btn" id="toggleTheme">Toggle Light/Dark</button>
-        </div>
-      </div>
+    <div id="cursor-glow"></div>
 
-      <div class="hero-right">
-        <nav class="socials" aria-label="Social links">
-          <a href="https://www.instagram.com/ksp_suryansh?igsh=MWJsY3Q3M2Q4Y3U0OA==" target="_blank" rel="noopener" title="Instagram"><img src="assets/instagram.svg" alt=""></a>
-          <a href="https://x.com/KasyapSuryansh?t=fKRkFBuJ7GGx3rS1v9aj7A&s=09" target="_blank" rel="noopener" title="X"><img src="assets/x.svg" alt=""></a>
-          <a href="https://github.com/" target="_blank" rel="noopener" title="GitHub"><img src="assets/github.svg" alt=""></a>
-          <a href="mailto:suryanshg821@gmail.com" title="Email"><img src="assets/email.svg" alt=""></a>
-          <a href="https://wa.me/918957131881" target="_blank" rel="noopener" title="WhatsApp"><img src="assets/whatsapp.svg" alt=""></a>
+    <header class="header glass-card">
+        <nav class="navbar container">
+            <a href="#home" class="nav-logo">Suryansh</a>
+            
+            <div class="nav-menu">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#habits">Habits</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                
+                <button id="theme-toggle" aria-label="Toggle light/dark mode">
+                    <i class="fas fa-sun"></i> </button>
+                
+                <div class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
         </nav>
-      </div>
     </header>
 
     <main>
-      <!-- About & Education -->
-      <section class="card grid-2 reveal">
-        <div>
-          <h3>🧑‍🎓 About Me</h3>
-          <p>I’m <strong>Suryansh</strong>, a Diploma in Civil Engineering (3rd Year) student at Government Polytechnic Changipur Noorpur Bijnor. I am focused on sustainable construction, structural design, and exploring AI tools that help engineers design faster and smarter.</p>
 
-          <h4>🎓 Education</h4>
-          <p><strong>Diploma in Civil Engineering – 3rd Year</strong><br>Government Polytechnic Changipur Noorpur Bijnor — Duration: 3 years</p>
-        </div>
+        <section id="home">
+            <h1 class="name-header reveal">Suryansh</h1>
+            <p class="tagline reveal" style="transition-delay: 0.2s;">Civil Engineering Student | Future Site Engineer</p>
+        </section>
 
-        <aside>
-          <div><strong>Habits</strong></div>
-          <ul>
-            <li>Time management and consistency</li>
-            <li>Reading about modern construction and AI tools</li>
-            <li>Teamwork and presentation skills</li>
-          </ul>
-        </aside>
-      </section>
-
-      <!-- Skills -->
-      <section class="card reveal">
-        <h3>💡 Skills</h3>
-        <div class="skills-grid">
-          <div class="skill"><span class="icon">🧭</span><div>AutoCAD</div></div>
-          <div class="skill"><span class="icon">📊</span><div>MS Excel</div></div>
-          <div class="skill"><span class="icon">🤖</span><div>Beginner Level AI</div></div>
-          <div class="skill"><span class="icon">📽️</span><div>PowerPoint (PPT)</div></div>
-        </div>
-      </section>
-
-      <!-- Projects -->
-      <section class="card reveal">
-        <h3>🏗️ Projects</h3>
-        <div class="projects-grid">
-          <article class="project">
-            <img src="https://drive.google.com/uc?export=view&id=1C3GR7J7xoSJfer_rfgZWhHG3AWACsER5" alt="2D House Design">
-            <div class="meta">
-              <strong>2 House Design</strong>
-              <p>This design was created in AutoCAD 3D and rendered. The image above is the 2D preview.</p>
+        <section id="about">
+            <div class="container">
+                <h2 class="reveal">🧑‍🎓 About Me</h2>
+                <div class="about-content glass-card reveal" style="transition-delay: 0.2s;">
+                    <p>
+                        Hello! I'm Suryansh, a passionate 3rd-year Diploma in Civil Engineering student. 
+                        I am deeply interested in building the future, with a strong focus on sustainable construction practices 
+                        and innovative structural design.
+                    </p>
+                    <p>
+                        I am always exploring new technologies and am particularly fascinated by the
+                        use of AI tools to optimize engineering solutions, improve efficiency, and create smarter infrastructure.
+                    </p>
+                </div>
             </div>
-          </article>
-        </div>
-      </section>
+        </section>
 
-      <!-- Contact -->
-      <section class="card reveal">
-        <h3>📞 Contact</h3>
-        <div class="contact-grid">
-          <form class="contact-form" id="contactForm">
-            <input type="text" id="name" placeholder="Your name" required>
-            <input type="email" id="email" placeholder="Your email" required>
-            <textarea id="message" placeholder="Your message" rows="5" required></textarea>
-            <div class="form-actions">
-              <button class="btn" type="submit">Send Message</button>
-              <a class="btn" id="whatsBtn" href="https://wa.me/918957131881?text=Hi%20Suryansh!%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect." target="_blank" rel="noopener">Message on WhatsApp</a>
+        <section id="education">
+            <div class="container">
+                <h2 class="reveal">🎓 Education</h2>
+                <div class="education-card glass-card reveal" style="transition-delay: 0.2s;">
+                    <h3>Diploma in Civil Engineering (3rd Year)</h3>
+                    <p>Government Polytechnic Changipur Noorpur, Bijnor</p>
+                    <p>Duration: 3 Years</p>
+                </div>
             </div>
-          </form>
+        </section>
 
-          <aside class="contact-direct">
-            <p>Email: <a href="mailto:suryanshg821@gmail.com">suryanshg821@gmail.com</a></p>
-            <p>Phone: <a href="tel:8957131881">+91 89571 31881</a></p>
-            <div class="socials">
-              <a href="https://www.instagram.com/ksp_suryansh?igsh=MWJsY3Q3M2Q4Y3U0OA==" target="_blank" rel="noopener"><img src="assets/instagram.svg" alt="Instagram"></a>
-              <a href="https://x.com/KasyapSuryansh?t=fKRkFBuJ7GGx3rS1v9aj7A&s=09" target="_blank" rel="noopener"><img src="assets/x.svg" alt="X"></a>
-              <a href="https://github.com/" target="_blank" rel="noopener"><img src="assets/github.svg" alt="GitHub"></a>
-              <a href="https://wa.me/918957131881" target="_blank" rel="noopener"><img src="assets/whatsapp.svg" alt="WhatsApp"></a>
+        <section id="skills">
+            <div class="container">
+                <h2 class="reveal">💡 Skills</h2>
+                <div class="skills-grid reveal" style="transition-delay: 0.2s;">
+                    <div class="skill-card glass-card reveal-child" style="--child-index: 1;">
+                        <i class="fas fa-drafting-compass"></i>
+                        <h3>AutoCAD</h3>
+                    </div>
+                    <div class="skill-card glass-card reveal-child" style="--child-index: 2;">
+                        <i class="fas fa-file-excel"></i>
+                        <h3>MS Excel</h3>
+                    </div>
+                    <div class="skill-card glass-card reveal-child" style="--child-index: 3;">
+                        <i class="fas fa-robot"></i>
+                        <h3>Beginner AI Expert</h3>
+                    </div>
+                    <div class="skill-card glass-card reveal-child" style="--child-index: 4;">
+                        <i class="fas fa-file-powerpoint"></i>
+                        <h3>PowerPoint (PPT)</h3>
+                    </div>
+                </div>
             </div>
-          </aside>
-        </div>
-      </section>
+        </section>
 
-      <footer>
-        <small>© 2025 Suryansh — Apple Blue Edition · Responsive & GitHub-ready</small>
-      </footer>
+        <section id="projects">
+            <div class="container">
+                <h2 class="reveal">🏗️ Projects</h2>
+                <div class="project-grid reveal" style="transition-delay: 0.2s;">
+                    
+                    <div class="project-card glass-card reveal-child" style="--child-index: 1;">
+                        <img src="https://drive.google.com/uc?id=1C3GR7J7xoSJfer_rfgZWhHG3AWACsER5" alt="2D House Design">
+                        <div class="project-info">
+                            <h3>2D House Design</h3>
+                            <p>
+                                A residential house plan designed in AutoCAD. This project involved creating detailed 2D floor plans,
+                                which were then visualized with 3D modeling and rendering techniques.
+                            </p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section id="habits">
+            <div class="container">
+                <h2 class="reveal">🌱 Habits</h2>
+                <div class="habits-list reveal" style="transition-delay: 0.2s;">
+                    <div class="habit-item glass-card reveal-child" style="--child-index: 1;">
+                        <i class="fas fa-clock"></i>
+                        <h3>Time management and consistency</h3>
+                    </div>
+                    <div class="habit-item glass-card reveal-child" style="--child-index: 2;">
+                        <i class="fas fa-book-open"></i>
+                        <h3>Reading about modern construction and AI tools</h3>
+                    </div>
+                    <div class="habit-item glass-card reveal-child" style="--child-index: 3;">
+                        <i class="fas fa-users"></i>
+                        <h3>Teamwork and presentation skills</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container reveal">
+                <h2>📞 Contact</h2>
+                <p>I'm open to opportunities and collaborations. Feel free to get in touch.</p>
+                
+                <div class="contact-buttons">
+                    <a href="mailto:suryanshg821@gmail.com" class="btn">
+                        <i class="fas fa-envelope"></i> Get In Touch
+                    </a>
+                    <a href="https://wa.me/918957131881" class="btn btn-whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Me
+                    </a>
+                </div>
+                
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:suryanshg821@gmail.com">suryanshg821@gmail.com</a></p>
+                    <p><i class="fas fa-phone"></i> +91 8957131881</p>
+                </div>
+            </div>
+        </section>
+
     </main>
-  </div>
 
-  <script src="script.js"></script>
+    <footer>
+        <div class="container reveal">
+            <p>&copy; 2025 Suryansh. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <div class="floating-socials-container">
+        <div class="social-icons-wrapper" id="social-icons-wrapper">
+            <a href="https://www.instagram.com/ksp_suryansh?igsh=MWJsY3Q3M2Q4Y3U0OA==" target="_blank" aria-label="Instagram" class="social-icon glass-card">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://x.com/KasyapSuryansh?t=fKRkFBuJ7GGx3rS1v9aj7A&s=09" target="_blank" aria-label="Twitter" class="social-icon glass-card">
+                <i class="fab fa-x-twitter"></i>
+            </a>
+            <a href="https://wa.me/918957131881" target="_blank" aria-label="WhatsApp" class="social-icon glass-card">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="httpsa://github.com/Suryanshg821" target="_blank" aria-label="GitHub" class="social-icon glass-card"> 
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:suryanshg821@gmail.com" aria-label="Email" class="social-icon glass-card">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        
+        <div class="social-toggle" id="social-toggle">
+            <i class="fas fa-ellipsis-h"></i>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. Loader ---
+            const loader = document.getElementById('loader');
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    loader.classList.add('hidden');
+                }, 1800); // 1.8 seconds delay
+            });
+
+            // --- 2. Cursor Glow ---
+            const cursorGlow = document.getElementById('cursor-glow');
+            document.addEventListener('mousemove', (e) => {
+                // Check if not on mobile (simple check)
+                if (window.innerWidth > 768) {
+                    cursorGlow.style.left = e.clientX + 'px';
+                    cursorGlow.style.top = e.clientY + 'px';
+                }
+            });
+
+            // --- 3. Theme Toggler ---
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const themeIcon = themeToggle.querySelector('i');
+            
+            // Function to set theme
+            function setTheme(theme) {
+                body.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                // Update icon
+                if (theme === 'light') {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                } else {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                }
+            }
+
+            // Check for saved theme in localStorage
+            const currentTheme = localStorage.getItem('theme') || 'dark'; // Default to dark
+            setTheme(currentTheme);
+
+            // Toggle on click
+            themeToggle.addEventListener('click', () => {
+                const newTheme = body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                setTheme(newTheme);
+            });
+
+            // --- 4. Mobile Menu Toggle ---
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinks = document.getElementById('nav-links');
+            const navLinkItems = document.querySelectorAll('.nav-links li a');
+            const menuIcon = menuToggle.querySelector('i');
+
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                
+                if (navLinks.classList.contains('active')) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                } else {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                }
+            });
+
+            // Close menu when a link is clicked
+            navLinkItems.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuIcon.classList.remove('fa-times');
+                        menuIcon.classList.add('fa-bars');
+                    }
+                });
+            });
+
+            // --- 5. Bouncy Scroll Animations ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach((el) => observer.observe(el));
+            
+            const revealChildren = document.querySelectorAll('.reveal-child');
+            revealChildren.forEach((el) => observer.observe(el));
+
+
+            // --- 6. Floating Socials Toggle ---
+            const socialToggle = document.getElementById('social-toggle');
+            const socialIconsWrapper = document.getElementById('social-icons-wrapper');
+            const toggleIcon = socialToggle.querySelector('i');
+
+            socialToggle.addEventListener('click', () => {
+                socialIconsWrapper.classList.toggle('active');
+                
+                // Change 3-dot icon to 'close' (X) icon
+                if (socialIconsWrapper.classList.contains('active')) {
+                    toggleIcon.classList.remove('fa-ellipsis-h');
+                    toggleIcon.classList.add('fa-times');
+                } else {
+                    toggleIcon.classList.remove('fa-times');
+                    toggleIcon.classList.add('fa-ellipsis-h');
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
