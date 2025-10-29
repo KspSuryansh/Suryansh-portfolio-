@@ -1,335 +1,127 @@
-<!DOCTYPE html><html lang="en">
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Suryansh Portfolio — Apple Blue Edition</title>
-  <meta name="description" content="Suryansh — Civil Engineering Student | Portfolio" />  <!-- Fonts & Icons -->  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  <style>
-    :root{
-      --apple-blue: #0a84ff;
-      --bg-light: linear-gradient(135deg,#f6f9ff 0%, #eef6ff 100%);
-      --bg-dark: linear-gradient(135deg,#0b1220 0%, #071428 100%);
-      --glass-light: rgba(255,255,255,0.55);
-      --glass-dark: rgba(10,20,30,0.35);
-      --card-shadow: 0 8px 30px rgba(2,12,27,0.12);
-      --glass-border: rgba(255,255,255,0.25);
-      --radius: 14px;
-      --max-w: 1100px;
-      --accent: var(--apple-blue);
-    }
+  <meta name="description" content="Suryansh — Civil Engineering Student | Portfolio" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Cursor glow -->
+  <div id="cursorGlow" class="cursor-glow" aria-hidden="true"></div>
 
-    /* Reset */
-    *{box-sizing:border-box; margin:0; padding:0}
-    html,body{height:100%}
-    body{
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      color:#0b1220;
-      background:var(--bg-light);
-      transition:background .45s ease, color .45s ease;
-      overflow-x:hidden;
-    }
-
-    /* Dark mode */
-    body.dark{
-      color:#e6f0ff;
-      background:var(--bg-dark);
-    }
-
-    /* Floating cursor glow */
-    .cursor-glow{
-      position:fixed; pointer-events:none; z-index:9999; mix-blend-mode:screen;
-      width:160px; height:160px; transform:translate(-50%,-50%);
-      background:radial-gradient(circle at 30% 30%, rgba(10,132,255,0.22), rgba(10,132,255,0.12) 20%, rgba(10,132,255,0.06) 45%, transparent 60%);
-      border-radius:50%; filter:blur(26px); transition:width .15s ease, height .15s ease, opacity .2s ease;
-      opacity:0.95; pointer-events:none;
-    }
-    body.dark .cursor-glow{ mix-blend-mode:screen }
-
-    /* Container */
-    .wrap{max-width:var(--max-w); margin:40px auto; padding:40px 24px; position:relative}
-
-    /* Glassmorphism panel */
-    header.app-hero{
-      border-radius:20px; padding:36px; position:relative; overflow:hidden;
-      backdrop-filter: blur(10px) saturate(130%);
-      -webkit-backdrop-filter: blur(10px) saturate(130%);
-      box-shadow:0 10px 40px rgba(8,20,40,0.08);
-      display:flex; gap:20px; align-items:center; justify-content:space-between;
-      background:linear-gradient(135deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
-      border:1px solid rgba(255,255,255,0.6);
-    }
-    body.dark header.app-hero{
-      background:linear-gradient(135deg, rgba(6,10,18,0.45), rgba(12,20,32,0.35));
-      border:1px solid rgba(255,255,255,0.06);
-    }
-
-    .hero-left{max-width:640px}
-    .kicker{color:var(--accent); font-weight:700; letter-spacing:0.3px}
-    h1.title{font-size:28px; margin:8px 0 6px; line-height:1.05}
-    .subtitle{opacity:.9; margin-bottom:14px}
-
-    /* Intro loading animation container */
-    .intro-wrap{position:absolute; inset:0; display:grid; place-items:center; background:transparent; pointer-events:none}
-    .intro{background:rgba(255,255,255,0.85); padding:22px 34px; border-radius:16px; box-shadow:var(--card-shadow); backdrop-filter:blur(6px); animation:fadeOut 1s ease .95s forwards;}
-    body.dark .intro{background:rgba(6,10,18,0.7)}
-    .intro h2{font-size:22px}
-
-    @keyframes fadeOut{to{opacity:0; transform:translateY(-8px); visibility:hidden}}
-
-    /* Buttons */
-    .cta{display:inline-flex; gap:10px; align-items:center}
-    .btn{background:linear-gradient(90deg,var(--accent),#5fb1ff); color:white; padding:10px 14px; border-radius:12px; border:none; cursor:pointer; font-weight:600; box-shadow:0 8px 24px rgba(10,132,255,0.12); transform:translateY(0); transition:transform .35s cubic-bezier(.22,1,.36,1)}
-    .btn:active{transform:translateY(2px) scale(.995)}
-
-    /* Layout sections */
-    main{margin-top:30px; display:grid; gap:26px}
-    section.card{
-      border-radius:14px; padding:20px; background:linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0.45));
-      border:1px solid rgba(255,255,255,0.6); backdrop-filter:blur(8px);
-      box-shadow: var(--card-shadow); transition:transform .5s cubic-bezier(.2,.9,.3,1), box-shadow .3s ease;
-    }
-    body.dark section.card{background:linear-gradient(180deg, rgba(12,20,32,0.45), rgba(8,14,24,0.35)); border:1px solid rgba(255,255,255,0.04)}
-
-    .card h3{margin-bottom:10px}
-    .grid-2{display:grid; grid-template-columns:1fr 360px; gap:20px}
-    @media(max-width:900px){.grid-2{grid-template-columns:1fr}}
-
-    /* Skills grid */
-    .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
-    @media(max-width:520px){.skills-grid{grid-template-columns:1fr}}
-    .skill{padding:12px; border-radius:10px; display:flex; gap:12px; align-items:center; background:linear-gradient(180deg, rgba(255,255,255,0.5), rgba(255,255,255,0.35)); border:1px solid rgba(255,255,255,0.5)}
-    body.dark .skill{background:linear-gradient(180deg, rgba(8,14,24,0.35), rgba(8,14,24,0.28)); border:1px solid rgba(255,255,255,0.04)}
-    .skill i{font-size:18px; color:var(--accent)}
-
-    /* Projects */
-    .projects-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px}
-    .project{border-radius:12px; overflow:hidden; position:relative; transform:translateY(0); will-change:transform}
-    .project img{width:100%; height:180px; object-fit:cover; display:block}
-    .project .meta{padding:12px}
-
-    /* Socials */
-    .socials{display:flex; gap:12px; align-items:center}
-    .socials a{display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4)); border:1px solid rgba(255,255,255,0.5)}
-    body.dark .socials a{background:linear-gradient(180deg, rgba(8,12,20,0.45), rgba(8,12,20,0.35)); border:1px solid rgba(255,255,255,0.04)}
-
-    /* Contact form */
-    form.contact-form{display:grid; gap:10px}
-    input,textarea{padding:12px; border-radius:10px; border:1px solid rgba(10,20,40,0.06); background:transparent}
-    input:focus,textarea:focus{outline:none; box-shadow:0 8px 24px rgba(10,132,255,0.08)}
-
-    footer{margin-top:28px; text-align:center; opacity:.9}
-
-    /* Scroll animations: initial state */
-    .reveal{opacity:0; transform:translateY(12px); transition:opacity .7s cubic-bezier(.2,.9,.3,1), transform .7s cubic-bezier(.2,.9,.3,1)}
-    .reveal.visible{opacity:1; transform:translateY(0)}
-
-    /* Bouncy micro animations */
-    .pop{animation:pop .9s cubic-bezier(.2,.9,.3,1) both}
-    @keyframes pop{0%{transform:translateY(18px) scale(.98); opacity:0}60%{transform:translateY(-6px) scale(1.02); opacity:1}100%{transform:translateY(0) scale(1)}}
-
-    /* small screens */
-    @media(max-width:520px){
-      header.app-hero{flex-direction:column; align-items:flex-start}
-      .hero-left{width:100%}
-    }
-  </style></head>
-<body>  <!-- Cursor glow -->  <div class="cursor-glow" id="cursorGlow"></div>  <div class="wrap">
-    <!-- Intro loading overlay (Apple-style) -->
-    <div class="intro-wrap" id="introWrap">
-      <div class="intro">
-        <h2>Hi, I'm <strong>Suryansh</strong></h2>
-        <p style="opacity:.85">Civil Engineering Student — Future Site Engineer</p>
-      </div>
-    </div><header class="app-hero">
-  <div class="hero-left">
-    <div class="kicker">Suryansh — Civil Engineering Student</div>
-    <h1 class="title">Suryansh – Civil Engineering Student | Future Site Engineer</h1>
-    <p class="subtitle">Passionate about sustainable construction, structural design, and using AI tools to improve engineering workflows.</p>
-    <div class="cta">
-      <button class="btn" id="contactBtn">Get in Touch</button>
-      <button class="btn" id="whatsappBtn">WhatsApp</button>
-      <button class="btn" id="toggleTheme">Toggle Light/Dark</button>
+  <!-- Loader / Intro -->
+  <div id="introWrap" class="intro-wrap" role="status" aria-live="polite">
+    <div class="intro">
+      <h2>Hi, I'm <strong>Suryansh</strong></h2>
+      <p>Civil Engineering Student — Future Site Engineer</p>
     </div>
   </div>
 
-  <div class="hero-right reveal" style="text-align:right">
-    <div class="socials">
-      <a href="https://www.instagram.com/ksp_suryansh?igsh=MWJsY3Q3M2Q4Y3U0OA==" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://x.com/KasyapSuryansh?t=fKRkFBuJ7GGx3rS1v9aj7A&s=09" target="_blank" title="X"><i class="fa-brands fa-x-twitter"></i></a>
-      <a href="https://github.com/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-      <a href="mailto:suryanshg821@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
-      <a href="https://wa.me/918957131881" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-    </div>
-  </div>
-</header>
-
-<main>
-  <!-- About & Education -->
-  <section class="card grid-2 reveal">
-    <div>
-      <h3>🧑‍🎓 About Me</h3>
-      <p>I’m <strong>Suryansh</strong>, a Diploma in Civil Engineering (3rd Year) student at Government Polytechnic Changipur Noorpur Bijnor. I am focused on sustainable construction, structural design, and exploring AI tools that help engineers design faster and smarter.</p>
-
-      <h4 style="margin-top:16px">🎓 Education</h4>
-      <p><strong>Diploma in Civil Engineering – 3rd Year</strong><br/>Government Polytechnic Changipur Noorpur Bijnor — Duration: 3 years</p>
-    </div>
-
-    <aside>
-      <div style="margin-bottom:12px"><strong>Habits</strong></div>
-      <ul style="line-height:1.7; list-style:disc; padding-left:16px">
-        <li>Time management and consistency</li>
-        <li>Reading about modern construction and AI tools</li>
-        <li>Teamwork and presentation skills</li>
-      </ul>
-    </aside>
-  </section>
-
-  <!-- Skills -->
-  <section class="card reveal">
-    <h3>💡 Skills</h3>
-    <div class="skills-grid" style="margin-top:12px">
-      <div class="skill pop"><i class="fa-solid fa-drafting-compass"></i><div>AutoCAD</div></div>
-      <div class="skill pop"><i class="fa-solid fa-table-cells"></i><div>MS Excel</div></div>
-      <div class="skill pop"><i class="fa-solid fa-robot"></i><div>Beginner Level AI</div></div>
-      <div class="skill pop"><i class="fa-solid fa-file-powerpoint"></i><div>PowerPoint (PPT)</div></div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section class="card reveal">
-    <h3>🏗️ Projects</h3>
-    <div class="projects-grid" style="margin-top:12px">
-      <article class="project pop">
-        <img src="https://drive.google.com/uc?export=view&id=1C3GR7J7xoSJfer_rfgZWhHG3AWACsER5" alt="2D House Design">
-        <div class="meta">
-          <strong>2 House Design</strong>
-          <p style="margin-top:8px; font-size:14px; opacity:.9">This design was created in AutoCAD 3D and rendered. The gallery image shows the 2D design preview. (Source: AutoCAD)</p>
+  <div class="wrap">
+    <header class="app-hero">
+      <div class="hero-left">
+        <div class="kicker">Suryansh — Civil Engineering Student</div>
+        <h1 class="title">Suryansh – Civil Engineering Student | Future Site Engineer</h1>
+        <p class="subtitle">Passionate about sustainable construction, structural design, and using AI tools to improve engineering workflows.</p>
+        <div class="cta">
+          <button class="btn" id="contactBtn">Get in Touch</button>
+          <button class="btn" id="whatsappBtn">WhatsApp</button>
+          <button class="btn" id="toggleTheme">Toggle Light/Dark</button>
         </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section class="card reveal">
-    <h3>📞 Contact</h3>
-    <div style="display:grid; gap:12px; grid-template-columns:1fr 320px; align-items:start">
-      <div>
-        <form class="contact-form" id="contactForm">
-          <input type="text" id="name" placeholder="Your name" required />
-          <input type="email" id="email" placeholder="Your email" required />
-          <textarea id="message" placeholder="Your message" rows="5" required></textarea>
-          <div style="display:flex; gap:10px;">
-            <button class="btn" type="submit">Send Message</button>
-            <a class="btn" id="whatsBtn" href="https://wa.me/918957131881?text=Hi%20Suryansh!%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect." target="_blank">Message on WhatsApp</a>
-          </div>
-        </form>
       </div>
 
-      <aside>
-        <div style="margin-bottom:10px"><strong>Direct</strong></div>
-        <p style="margin-bottom:6px">Email: <a href="mailto:suryanshg821@gmail.com">suryanshg821@gmail.com</a></p>
-        <p>Phone: <a href="tel:8957131881">+91 89571 31881</a></p>
-        <div style="margin-top:14px">
-          <strong>Follow</strong>
-          <div style="height:10px"></div>
-          <div class="socials">
-            <a href="https://www.instagram.com/ksp_suryansh?igsh=MWJsY3Q3M2Q4Y3U0OA==" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://x.com/KasyapSuryansh?t=fKRkFBuJ7GGx3rS1v9aj7A&s=09" target="_blank" title="X"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="https://github.com/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-            <a href="mailto:suryanshg821@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
-            <a href="https://wa.me/918957131881" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          </div>
+      <div class="hero-right">
+        <nav class="socials" aria-label="Social links">
+          <a href="https://www.instagram.com/ksp_suryansh?igsh=MWJsY3Q3M2Q4Y3U0OA==" target="_blank" rel="noopener" title="Instagram"><img src="assets/instagram.svg" alt=""></a>
+          <a href="https://x.com/KasyapSuryansh?t=fKRkFBuJ7GGx3rS1v9aj7A&s=09" target="_blank" rel="noopener" title="X"><img src="assets/x.svg" alt=""></a>
+          <a href="https://github.com/" target="_blank" rel="noopener" title="GitHub"><img src="assets/github.svg" alt=""></a>
+          <a href="mailto:suryanshg821@gmail.com" title="Email"><img src="assets/email.svg" alt=""></a>
+          <a href="https://wa.me/918957131881" target="_blank" rel="noopener" title="WhatsApp"><img src="assets/whatsapp.svg" alt=""></a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- About & Education -->
+      <section class="card grid-2 reveal">
+        <div>
+          <h3>🧑‍🎓 About Me</h3>
+          <p>I’m <strong>Suryansh</strong>, a Diploma in Civil Engineering (3rd Year) student at Government Polytechnic Changipur Noorpur Bijnor. I am focused on sustainable construction, structural design, and exploring AI tools that help engineers design faster and smarter.</p>
+
+          <h4>🎓 Education</h4>
+          <p><strong>Diploma in Civil Engineering – 3rd Year</strong><br>Government Polytechnic Changipur Noorpur Bijnor — Duration: 3 years</p>
         </div>
-      </aside>
-    </div>
-  </section>
 
-  <footer>
-    <small>© 2025 Suryansh — Apple Blue Edition · Built with ❤️ • Responsive & GitHub-ready</small>
-  </footer>
-</main>
+        <aside>
+          <div><strong>Habits</strong></div>
+          <ul>
+            <li>Time management and consistency</li>
+            <li>Reading about modern construction and AI tools</li>
+            <li>Teamwork and presentation skills</li>
+          </ul>
+        </aside>
+      </section>
 
-  </div>  <script>
-    // ---------- Intro loading (auto hide after 950ms + animation) ----------
-    window.addEventListener('load', ()=>{
-      const intro = document.getElementById('introWrap');
-      setTimeout(()=>{ intro.style.pointerEvents='none'; intro.style.opacity='0'; intro.style.transform='translateY(-6px)'; intro.style.transition='opacity .6s ease, transform .6s ease';
-        setTimeout(()=>intro.remove(),900);
-      },900);
-    });
+      <!-- Skills -->
+      <section class="card reveal">
+        <h3>💡 Skills</h3>
+        <div class="skills-grid">
+          <div class="skill"><span class="icon">🧭</span><div>AutoCAD</div></div>
+          <div class="skill"><span class="icon">📊</span><div>MS Excel</div></div>
+          <div class="skill"><span class="icon">🤖</span><div>Beginner Level AI</div></div>
+          <div class="skill"><span class="icon">📽️</span><div>PowerPoint (PPT)</div></div>
+        </div>
+      </section>
 
-    // ---------- Cursor Glow ----------
-    const glow = document.getElementById('cursorGlow');
-    document.addEventListener('mousemove', (e)=>{
-      glow.style.left = e.clientX + 'px';
-      glow.style.top = e.clientY + 'px';
-    });
-    // shrink on touchstart for mobile
-    document.addEventListener('touchstart', ()=>{glow.style.display='none'});
+      <!-- Projects -->
+      <section class="card reveal">
+        <h3>🏗️ Projects</h3>
+        <div class="projects-grid">
+          <article class="project">
+            <img src="https://drive.google.com/uc?export=view&id=1C3GR7J7xoSJfer_rfgZWhHG3AWACsER5" alt="2D House Design">
+            <div class="meta">
+              <strong>2 House Design</strong>
+              <p>This design was created in AutoCAD 3D and rendered. The image above is the 2D preview.</p>
+            </div>
+          </article>
+        </div>
+      </section>
 
-    // ---------- Theme Toggle (Light/Dark) ----------
-    const toggle = document.getElementById('toggleTheme');
-    toggle.addEventListener('click', ()=>{
-      document.body.classList.toggle('dark');
-    });
+      <!-- Contact -->
+      <section class="card reveal">
+        <h3>📞 Contact</h3>
+        <div class="contact-grid">
+          <form class="contact-form" id="contactForm">
+            <input type="text" id="name" placeholder="Your name" required>
+            <input type="email" id="email" placeholder="Your email" required>
+            <textarea id="message" placeholder="Your message" rows="5" required></textarea>
+            <div class="form-actions">
+              <button class="btn" type="submit">Send Message</button>
+              <a class="btn" id="whatsBtn" href="https://wa.me/918957131881?text=Hi%20Suryansh!%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect." target="_blank" rel="noopener">Message on WhatsApp</a>
+            </div>
+          </form>
 
-    // ---------- Smooth reveal on scroll (IntersectionObserver) ----------
-    const reveals = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          entry.target.classList.add('visible');
-          // add small stagger pop to children
-          entry.target.querySelectorAll('.pop').forEach((el,i)=>{ setTimeout(()=>el.classList.add('pop'), i*80); });
-          io.unobserve(entry.target);
-        }
-      });
-    },{threshold:0.12});
-    reveals.forEach(r=>io.observe(r));
+          <aside class="contact-direct">
+            <p>Email: <a href="mailto:suryanshg821@gmail.com">suryanshg821@gmail.com</a></p>
+            <p>Phone: <a href="tel:8957131881">+91 89571 31881</a></p>
+            <div class="socials">
+              <a href="https://www.instagram.com/ksp_suryansh?igsh=MWJsY3Q3M2Q4Y3U0OA==" target="_blank" rel="noopener"><img src="assets/instagram.svg" alt="Instagram"></a>
+              <a href="https://x.com/KasyapSuryansh?t=fKRkFBuJ7GGx3rS1v9aj7A&s=09" target="_blank" rel="noopener"><img src="assets/x.svg" alt="X"></a>
+              <a href="https://github.com/" target="_blank" rel="noopener"><img src="assets/github.svg" alt="GitHub"></a>
+              <a href="https://wa.me/918957131881" target="_blank" rel="noopener"><img src="assets/whatsapp.svg" alt="WhatsApp"></a>
+            </div>
+          </aside>
+        </div>
+      </section>
 
-    // ---------- Bouncy hover for buttons & project cards ----------
-    document.querySelectorAll('.btn, .project').forEach(el=>{
-      el.addEventListener('mouseenter', ()=>{ el.style.transform='translateY(-6px)'; });
-      el.addEventListener('mouseleave', ()=>{ el.style.transform='translateY(0)'; });
-    });
+      <footer>
+        <small>© 2025 Suryansh — Apple Blue Edition · Responsive & GitHub-ready</small>
+      </footer>
+    </main>
+  </div>
 
-    // ---------- Contact form: open mailto with filled fields (works without backend) ----------
-    const form = document.getElementById('contactForm');
-    form.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-      const subject = encodeURIComponent('Portfolio Contact from ' + name);
-      const body = encodeURIComponent('Name: '+name+'
-Email: '+email+'
-
-'+message);
-      window.location.href = `mailto:suryanshg821@gmail.com?subject=${subject}&body=${body}`;
-    });
-
-    // ---------- WhatsApp button ----------
-    const whatsappBtn = document.getElementById('whatsappBtn');
-    whatsappBtn.addEventListener('click', ()=>{
-      window.open('https://wa.me/918957131881?text=Hi%20Suryansh!%20I%20saw%20your%20portfolio.','_blank');
-    });
-    document.getElementById('contactBtn').addEventListener('click', ()=>{
-      document.getElementById('name').focus(); window.scrollTo({top:document.querySelector('.contact-form').offsetTop - 80, behavior:'smooth'});
-    });
-
-    // ---------- Simple parallax on mouse move for background depth ----------
-    document.addEventListener('mousemove', (e)=>{
-      const x = (e.clientX / window.innerWidth - 0.5) * 10; // -5 .. 5
-      const y = (e.clientY / window.innerHeight - 0.5) * 6; // -3 .. 3
-      document.querySelectorAll('header.app-hero, section.card').forEach((el,i)=>{
-        el.style.transform = `translate3d(${x/ (i+1)}px, ${y/ (i+1)}px, 0)`;
-      });
-    });
-
-    // ---------- Ensure cursor glow color matches apple-blue in dark/light ----------
-    // (using CSS radial gradient already tied to --apple-blue)
-
-  </script></body>
+  <script src="script.js"></script>
+</body>
 </html>

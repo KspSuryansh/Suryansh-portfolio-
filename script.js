@@ -1,40 +1,59 @@
-// Theme toggle and sticky header + fade-in using IntersectionObserver
-(function(){
-  const toggle = document.getElementById('themeToggle');
-  const root = document.documentElement;
-  const body = document.body;
-  // Load saved theme
-  const saved = localStorage.getItem('theme');
-  if(saved === 'dark'){ body.classList.add('theme-dark'); toggle.textContent = '☀️'; }
+// Loader intro auto-hide
+window.addEventListener('load', ()=>{
+  const intro = document.getElementById('introWrap');
+  setTimeout(()=>{
+    intro.style.opacity='0';
+    intro.style.transform='translateY(-8px)';
+    intro.style.transition='opacity .6s ease, transform .6s ease';
+    setTimeout(()=>intro.remove(),800);
+  },900);
+});
 
-  toggle.addEventListener('click', ()=>{
-    const dark = body.classList.toggle('theme-dark');
-    toggle.textContent = dark ? '☀️' : '🌙';
-    localStorage.setItem('theme', dark ? 'dark' : 'light');
+// Cursor glow follow
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', (e)=>{
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+document.addEventListener('touchstart', ()=>{ glow.style.display='none'; });
+
+// Theme toggle
+const toggle = document.getElementById('toggleTheme');
+toggle.addEventListener('click', ()=>{
+  document.body.classList.toggle('dark');
+});
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      // animate children with pop class
+      entry.target.querySelectorAll('.pop').forEach((el,i)=>{ setTimeout(()=>el.classList.add('pop'), i*80); });
+      io.unobserve(entry.target);
+    }
   });
+},{threshold:0.12});
+reveals.forEach(r=>io.observe(r));
 
-  // Sticky header shrink on scroll
-  const header = document.getElementById('siteHeader');
-  let lastScroll = 0;
-  window.addEventListener('scroll', ()=>{
-    const sc = window.scrollY;
-    if(sc > 40) header.classList.add('scrolled'); else header.classList.remove('scrolled');
-    lastScroll = sc;
-  });
+// Contact form - opens mailto with prefilled content
+const form = document.getElementById('contactForm');
+form.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+  const subject = encodeURIComponent('Portfolio Contact from ' + name);
+  const body = encodeURIComponent('Name: '+name+'\\nEmail: '+email+'\\n\\n'+message);
+  window.location.href = `mailto:suryanshg821@gmail.com?subject=${subject}&body=${body}`;
+});
 
-  // Fade in sections
-  const observer = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, {threshold:0.15});
-  document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
-
-  // Smooth anchor scroll for header links
-  document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click',(e)=>{
-      e.preventDefault();
-      document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth', block:'start'});
-    });
-  });
-})();
+// Buttons actions
+document.getElementById('whatsappBtn').addEventListener('click', ()=>{
+  window.open('https://wa.me/918957131881?text=Hi%20Suryansh!%20I%20saw%20your%20portfolio.','_blank');
+});
+document.getElementById('contactBtn').addEventListener('click', ()=>{
+  document.getElementById('name').focus();
+  window.scrollTo({top:document.querySelector('.contact-form').offsetTop - 80, behavior:'smooth'});
+});
