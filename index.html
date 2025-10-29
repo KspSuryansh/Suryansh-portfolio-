@@ -3,111 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Suryansh | Civil Engineering Student</title>
+  <title>Suryansh – Civil Engineering Student | Future Site Engineer</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-  <header class="hero">
-    <div class="toggle-container">
-      <h1>Suryansh</h1>
-      <button id="theme-toggle" title="Switch Theme">
-        <i class="fas fa-moon"></i>
-      </button>
-    </div>
-    <p>Civil Engineering Student | Future Site Engineer</p>
-  </header>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#education">Education</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#habits">Habits</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<header>
+  <h1>Suryansh</h1>
+  <p>Civil Engineering Student | Future Site Engineer</p>
+</header>
 
-  <section id="about" class="section">
-    <h2>🧑‍🎓 About Me</h2>
-    <p>I’m a passionate Civil Engineering student interested in <strong>sustainable construction</strong>, <strong>structural design</strong>, and the <strong>use of AI tools in engineering</strong>.</p>
-  </section>
+<section id="about" data-aos="fade-up">
+  <h2>About Me</h2>
+  <p>I’m a passionate Civil Engineering student interested in sustainable construction, structural design, and the use of AI tools in engineering.</p>
+</section>
 
-  <section id="education" class="section">
-    <h2>🎓 Education</h2>
-    <p><strong>Diploma in Civil Engineering – 3rd Year</strong></p>
-    <p>Government Polytechnic Changipur Noorpur, Bijnor (3 Years)</p>
-  </section>
+<section id="education" data-aos="fade-up">
+  <h2>Education</h2>
+  <p>Diploma in Civil Engineering – 3rd Year<br>Government Polytechnic Changipur Noorpur Bijnor (3 Years)</p>
+</section>
 
-  <section id="skills" class="section">
-    <h2>💡 Skills</h2>
-    <ul class="skills">
-      <li><i class="fas fa-drafting-compass bounce"></i> AutoCAD</li>
-      <li><i class="fas fa-table bounce"></i> MS Excel</li>
-      <li><i class="fas fa-robot bounce"></i> Beginner Level AI Expert</li>
-      <li><i class="fas fa-file-powerpoint bounce"></i> PowerPoint (PPT)</li>
-    </ul>
-  </section>
+<section id="skills" data-aos="fade-up">
+  <h2>Skills</h2>
+  <ul>
+    <li>AutoCAD</li>
+    <li>MS Excel</li>
+    <li>AI (Beginner Level)</li>
+    <li>PowerPoint (PPT)</li>
+  </ul>
+</section>
 
-  <section id="projects" class="section">
-    <h2>🏗️ Projects</h2>
-    <div class="project-card">
-      <img src="https://drive.google.com/uc?export=view&id=1C3GR7J7xoSJfer_rfgZWhHG3AWACsER5" alt="House Design" />
-      <h3>2D House Design</h3>
-      <p>This design was created in AutoCAD 3D and rendered for realistic visualization.</p>
-    </div>
-  </section>
+<section id="projects" data-aos="fade-up">
+  <h2>Projects</h2>
+  <div class="card">
+    <h3>2 House Design</h3>
+    <p>This design was created in AutoCAD 3D and rendered beautifully.</p>
+    <a href="https://drive.google.com/file/d/1C3GR7J7xoSJfer_rfgZWhHG3AWACsER5/view?usp=drivesdk" target="_blank">View Design</a>
+  </div>
+</section>
 
-  <section id="habits" class="section">
-    <h2>🌱 Habits</h2>
-    <ul>
-      <li>Time management and consistency</li>
-      <li>Reading about modern construction and AI tools</li>
-      <li>Teamwork and presentation skills</li>
-    </ul>
-  </section>
+<section id="habits" data-aos="fade-up">
+  <h2>Habits</h2>
+  <ul>
+    <li>Time management and consistency</li>
+    <li>Reading about modern construction and AI tools</li>
+    <li>Teamwork and presentation skills</li>
+  </ul>
+</section>
 
-  <section id="social" class="section">
-    <h2>🌐 Social Links</h2>
-    <p>
-      <a href="https://www.instagram.com/ksp_suryansh?igsh=MWJsY3Q3M2Q4Y3U0OA==" target="_blank"><i class="fab fa-instagram"></i> Instagram</a> |
-      <a href="https://x.com/KasyapSuryansh?t=fKRkFBuJ7GGx3rS1v9aj7A&s=09" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
-    </p>
-  </section>
+<section id="contact" data-aos="fade-up">
+  <h2>Contact</h2>
+  <p>Email: <a href="mailto:suryanshg821@gmail.com">suryanshg821@gmail.com</a></p>
+  <p>Phone: 8957131881</p>
+  <p><a href="https://www.instagram.com/ksp_suryansh">Instagram</a> | 
+     <a href="https://x.com/KasyapSuryansh">Twitter</a></p>
+  <button onclick="alert('Thank you for visiting!')">Get in Touch</button>
+</section>
 
-  <section id="contact" class="section contact">
-    <h2>📞 Contact</h2>
-    <p>Email: <a href="mailto:suryanshg821@gmail.com">suryanshg821@gmail.com</a></p>
-    <p>Phone: <a href="tel:+918957131881">8957131881</a></p>
-    <a href="mailto:suryanshg821@gmail.com" class="btn">Get in Touch</a>
-  </section>
+<footer>
+  <p>© 2025 Suryansh | Designed with 💙</p>
+</footer>
 
-  <footer>
-    <p>© 2025 Suryansh | All Rights Reserved</p>
-  </footer>
-
-  <script>
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', e => {
-        e.preventDefault();
-        document.querySelector(anchor.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-
-    // Dark mode toggle
-    const toggleBtn = document.getElementById('theme-toggle');
-    const body = document.body;
-    toggleBtn.addEventListener('click', () => {
-      body.classList.toggle('dark');
-      const icon = toggleBtn.querySelector('i');
-      if (body.classList.contains('dark')) {
-        icon.classList.replace('fa-moon', 'fa-sun');
-      } else {
-        icon.classList.replace('fa-sun', 'fa-moon');
-      }
-    });
-  </script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init();</script>
 </body>
 </html>
