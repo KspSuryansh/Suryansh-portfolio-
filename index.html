@@ -238,16 +238,32 @@
             cursor: pointer;
         }
 
-        /* --- 6. Home/Hero Section --- */
+        /* --- 6. Home/Hero Section (MODIFIED) --- */
         #home {
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Changed to column */
             justify-content: center;
             align-items: center;
             text-align: center;
             padding-top: 70px; /* Offset for fixed header */
         }
+        
+        /* NEW: Profile Photo Style */
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Makes it circular */
+            object-fit: cover; /* Keeps image aspect ratio */
+            margin-bottom: 1.5rem;
+            border: 3px solid var(--apple-blue-light);
+            box-shadow: 0 4px 20px rgba(0, 122, 255, 0.2);
+            transition: transform 0.4s var(--bounce-cubic);
+        }
+        .profile-photo:hover {
+            transform: scale(1.05);
+        }
+
         #home .name-header {
             font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 700;
@@ -258,7 +274,18 @@
             font-size: clamp(1rem, 4vw, 1.5rem);
             color: var(--text-secondary);
             font-weight: 400;
+            margin-bottom: 0.25rem; /* Reduced margin */
         }
+
+        /* NEW: Secondary Tagline Style */
+        .tagline-secondary {
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            color: var(--text-secondary);
+            font-weight: 300;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
 
         /* --- 7. Sections (About, Edu, etc.) --- */
         #about .about-content {
@@ -513,6 +540,12 @@
             h1 { font-size: 2.5rem; }
             h2 { font-size: 2rem; }
             
+            /* NEW: Mobile Profile Photo */
+            .profile-photo {
+                width: 120px;
+                height: 120px;
+            }
+
             /* Hide cursor glow on mobile */
             #cursor-glow {
                 display: none;
@@ -580,7 +613,9 @@
         
     </style>
 </head>
-<body data-theme="dark"> <div id="loader">
+<body data-theme="dark"> 
+
+    <div id="loader">
         <h1>Hi, I'm Suryansh</h1>
     </div>
 
@@ -613,8 +648,16 @@
     <main>
 
         <section id="home">
-            <h1 class="name-header reveal">Suryansh</h1>
-            <p class="tagline reveal" style="transition-delay: 0.2s;">Civil Engineering Student | Future Site Engineer</p>
+            <img src="1000031916.png" alt="Suryansh Profile Photo" class="profile-photo reveal" style="transition-delay: 0.1s;">
+            
+            <h1 class="name-header reveal" style="transition-delay: 0.3s;">Suryansh</h1>
+            
+            <p class="tagline reveal" style="transition-delay: 0.5s;">
+                Passionate Civil Engineering Student
+            </p>
+            <p class="tagline-secondary reveal" style="transition-delay: 0.7s;">
+                Specializing in Sustainable Design & AI-Driven Solutions
+            </p>
         </section>
 
         <section id="about">
@@ -749,7 +792,7 @@
             <a href="https://wa.me/918957131881" target="_blank" aria-label="WhatsApp" class="social-icon glass-card">
                 <i class="fab fa-whatsapp"></i>
             </a>
-            <a href="httpsa://github.com/Suryanshg821" target="_blank" aria-label="GitHub" class="social-icon glass-card"> 
+            <a href="https{s://github.com/Suryanshg821}" target="_blank" aria-label="GitHub" class="social-icon glass-card"> 
                 <i class="fab fa-github"></i>
             </a>
             <a href="mailto:suryanshg821@gmail.com" aria-label="Email" class="social-icon glass-card">
