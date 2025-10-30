@@ -428,6 +428,18 @@
         #contact {
             text-align: center;
         }
+        
+        /* NEW: Section Hover Effect */
+        #contact .container {
+            transition: transform 0.4s var(--bounce-cubic), box-shadow 0.4s ease;
+            border-radius: 16px; 
+        }
+        #contact:hover .container.visible { 
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px var(--glass-shadow);
+        }
+        /* End of Section Hover Effect */
+        
         .contact-info {
             margin: 2rem 0;
             display: flex;
@@ -478,10 +490,12 @@
             border: none;
             cursor: pointer;
             transition: transform 0.4s var(--bounce-cubic), box-shadow 0.3s ease;
+            animation: pulse-bounce 2.5s infinite; /* NEW: Added animation */
         }
         .btn:hover {
             transform: scale(1.05);
             box-shadow: 0 6px 20px rgba(0, 122, 255, 0.3);
+            animation-play-state: paused; /* NEW: Pause animation on hover */
         }
 
         .btn-whatsapp {
@@ -843,15 +857,14 @@
                     <a href="mailto:suryanshg821@gmail.com" class="btn">
                         <i class="fas fa-envelope"></i> Get In Touch
                     </a>
-                    <a href="https://wa.me/918957131881" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-whatsapp"></i> WhatsApp Me
+                    <a href="https://whatsapp.com/channel/0029Vb6abDhGzzKSuAVtD30W" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Channel
                     </a>
                 </div>
                 
                 <div class="contact-info">
                     <p><i class="fas fa-envelope"></i> <a href="mailto:suryanshg821@gmail.com">suryanshg821@gmail.com</a></p>
-                    <p><i class="fas fa-phone"></i> +91 8957131881</p>
-                </div>
+                    </div>
             </div>
         </section>
 
@@ -871,7 +884,7 @@
             <a href="https://x.com/KasyapSuryansh?t=fKRkFBuJ7GGx3rS1v9aj7A&s=09" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-icon glass-card">
                 <i class="fab fa-x-twitter"></i>
             </a>
-            <a href="https://wa.me/918957131881" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-icon glass-card">
+            <a href="https://whatsapp.com/channel/0029Vb6abDhGzzKSuAVtD30W" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-icon glass-card">
                 <i class="fab fa-whatsapp"></i>
             </a>
             <a href="https://github.com/Suryanshg821" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon glass-card"> 
@@ -1008,4 +1021,3 @@
 
 </body>
 </html>
-
