@@ -290,8 +290,14 @@
             font-size: 1rem;
             transition: transform 0.4s var(--bounce-cubic), box-shadow 0.3s ease;
             box-shadow: 0 8px 20px rgba(0, 122, 255, 0.25);
+            
+            /* --- ADDED --- */
+            animation: hero-bounce 2.5s var(--bounce-cubic) infinite;
         }
         .hero-button:hover {
+            /* --- ADDED --- */
+            animation: none;
+            
             transform: translateY(-4px) scale(1.05);
             box-shadow: 0 12px 30px rgba(0, 122, 255, 0.4);
             color: #fff;
@@ -562,6 +568,17 @@
             transform: scale(1.1);
         }
 
+        /* --- ADDED: Bouncy Button Keyframes --- */
+        @keyframes hero-bounce {
+          0%, 100% {
+            transform: translateY(0) scale(1);
+          }
+          50% {
+            /* थोड़ा ऊपर उछालें और हल्का सा बड़ा करें */
+            transform: translateY(-8px) scale(1.03);
+          }
+        }
+
         /* --- 15. Mobile Responsiveness --- */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
@@ -626,338 +643,4 @@
             }
             
             /* Mobile adjustments for floating socials */
-            .floating-socials-container {
-                bottom: 1.5rem;
-                right: 1.5rem;
-                gap: 0.5rem;
-            }
-            .social-toggle, .social-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 1.3rem;
-            }
-
-            /* Mobile Contact Info Adjustment */
-            .contact-info p {
-                font-size: 1.1rem; /* Slightly smaller on mobile for better fit */
-            }
-            .contact-info i {
-                font-size: 1.3rem;
-            }
-        }
-        
-    </style>
-</head>
-<body data-theme="dark"> 
-
-    <div id="loader">
-        <h1>Hi, I'm Suryansh</h1>
-    </div>
-
-    <div id="cursor-glow"></div>
-
-    <header class="header glass-card">
-        <nav class="navbar container">
-            <a href="#home" class="nav-logo">Suryansh</a>
-            
-            <div class="nav-menu">
-                <ul class="nav-links" id="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#education">Education</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#habits">Habits</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                
-                <button id="theme-toggle" aria-label="Toggle light/dark mode">
-                    <i class="fas fa-sun"></i> </button>
-                
-                <div class="menu-toggle" id="menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-
-        <section id="home">
-            <img src="1000031916.png" alt="Suryansh Profile Photo" class="profile-photo reveal" style="transition-delay: 0.1s;">
-            
-            <h1 class="name-header reveal" style="transition-delay: 0.3s;">Suryansh</h1>
-            
-            <p class="tagline reveal" style="transition-delay: 0.5s;">
-                I'm Civil Engineering Student | Future Site Engineer
-            </p>
-            
-            <a href="#about" class="hero-button reveal" style="transition-delay: 0.7s;">Learn More</a>
-        </section>
-
-        
-        <section id="about">
-            <div class="container">
-                <h2 class="reveal">🧑‍🎓 About Me</h2>
-                <div class="about-content glass-card reveal" style="transition-delay: 0.2s;">
-                    <p>
-                        Hello! I'm Suryansh, a passionate 3rd-year Diploma in Civil Engineering student. 
-                        I am deeply interested in building the future, with a strong focus on sustainable construction practices 
-                        and innovative structural design.
-                    </p>
-                    <p>
-                        I am always exploring new technologies and am particularly fascinated by the
-                        use of AI tools to optimize engineering solutions, improve efficiency, and create smarter infrastructure.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="education">
-            <div class="container">
-                <h2 class="reveal">🎓 Education</h2>
-                <div class="education-card glass-card reveal" style="transition-delay: 0.2s;">
-                    <h3>Diploma in Civil Engineering (3rd Year)</h3>
-                    <p>Government Polytechnic Changipur Noorpur, Bijnor</p>
-                    <p>Duration: 3 Years</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="skills">
-            <div class="container">
-                <h2 class="reveal">💡 Skills</h2>
-                <div class="skills-grid reveal" style="transition-delay: 0.2s;">
-                    <div class="skill-card glass-card reveal-child" style="--child-index: 1;">
-                        <i class="fas fa-drafting-compass"></i>
-                        <h3>AutoCAD</h3>
-                    </div>
-                    <div class="skill-card glass-card reveal-child" style="--child-index: 2;">
-                        <i class="fas fa-file-excel"></i>
-                        <h3>MS Excel</h3>
-                    </div>
-                    <div class="skill-card glass-card reveal-child" style="--child-index: 3;">
-                        <i class="fas fa-robot"></i>
-                        <h3>Beginner AI Expert</h3>
-                    </div>
-                    <div class="skill-card glass-card reveal-child" style="--child-index: 4;">
-                        <i class="fas fa-file-powerpoint"></i>
-                        <h3>PowerPoint (PPT)</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects">
-            <div class="container">
-                <h2 class="reveal">🏗️ Projects</h2>
-                <div class="project-grid reveal" style="transition-delay: 0.2s;">
-                    
-                    <div class="project-card glass-card reveal-child" style="--child-index: 1;">
-                        <img src="https://drive.google.com/file/d/1C3GR7J7xoSJfer_rfgZWhHG3AWACsER5/view?usp=drivesdk" alt="2D House Design">
-                        <div class="project-info">
-                            <h3>2D House Design</h3>
-                            <p>
-                                A residential house plan designed in AutoCAD. This project involved creating detailed 2D floor plans,
-                                which were then visualized with 3D modeling and rendering techniques.
-                            </p>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </section>
-
-        <section id="habits">
-            <div class="container">
-                <h2 class="reveal">🌱 Habits</h2>
-                <div class="habits-list reveal" style="transition-delay: 0.2s;">
-                    <div class="habit-item glass-card reveal-child" style="--child-index: 1;">
-                        <i class="fas fa-clock"></i>
-                        <h3>Time management and consistency</h3>
-                    </div>
-                    <div class="habit-item glass-card reveal-child" style="--child-index: 2;">
-                        <i class="fas fa-book-open"></i>
-                        <h3>Reading about modern construction and AI tools</h3>
-                    </div>
-                    <div class="habit-item glass-card reveal-child" style="--child-index: 3;">
-                        <i class="fas fa-users"></i>
-                        <h3>Teamwork and presentation skills</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <div class="container reveal">
-                <h2>📞 Contact</h2>
-                <p>I'm open to opportunities and collaborations. Feel free to get in touch.</p>
-                
-                <div class="contact-buttons">
-                    <a href="mailto:suryanshg821@gmail.com" class="btn">
-                        <i class="fas fa-envelope"></i> Get In Touch
-                    </a>
-                    <a href="https://wa.me/918957131881" class="btn btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> WhatsApp Me
-                    </a>
-                </div>
-                
-                <div class="contact-info">
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:suryanshg821@gmail.com">suryanshg821@gmail.com</a></p>
-                    <p><i class="fas fa-phone"></i> +91 8957131881</p>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        <div class="container reveal">
-            <p>&copy; 2025 Suryansh. All rights reserved.</p>
-        </div>
-    </footer>
-    
-    <div class="floating-socials-container">
-        <div class="social-icons-wrapper" id="social-icons-wrapper">
-            <a href="https://www.instagram.com/ksp_suryansh?igsh=MWJsY3Q3M2Q4Y3U0OA==" target="_blank" aria-label="Instagram" class="social-icon glass-card">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://x.com/KasyapSuryansh?t=fKRkFBuJ7GGx3rS1v9aj7A&s=09" target="_blank" aria-label="Twitter" class="social-icon glass-card">
-                <i class="fab fa-x-twitter"></i>
-            </a>
-            <a href="https://wa.me/918957131881" target="_blank" aria-label="WhatsApp" class="social-icon glass-card">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-            <a href="https://github.com/Suryanshg821" target="_blank" aria-label="GitHub" class="social-icon glass-card"> 
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="mailto:suryanshg821@gmail.com" aria-label="Email" class="social-icon glass-card">
-                <i class="fas fa-envelope"></i>
-            </a>
-        </div>
-        
-        <div class="social-toggle" id="social-toggle">
-            <i class="fas fa-ellipsis-h"></i>
-        </div>
-    </div>
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- 1. Loader ---
-            const loader = document.getElementById('loader');
-            window.addEventListener('load', () => {
-                setTimeout(() => {
-                    loader.classList.add('hidden');
-                }, 1800); // 1.8 seconds delay
-            });
-
-            // --- 2. Cursor Glow ---
-            const cursorGlow = document.getElementById('cursor-glow');
-            document.addEventListener('mousemove', (e) => {
-                // Check if not on mobile (simple check)
-                if (window.innerWidth > 768) {
-                    cursorGlow.style.left = e.clientX + 'px';
-                    cursorGlow.style.top = e.clientY + 'px';
-                }
-            });
-
-            // --- 3. Theme Toggler ---
-            const themeToggle = document.getElementById('theme-toggle');
-            const body = document.body;
-            const themeIcon = themeToggle.querySelector('i');
-            
-            // Function to set theme
-            function setTheme(theme) {
-                body.setAttribute('data-theme', theme);
-                localStorage.setItem('theme', theme);
-                // Update icon
-                if (theme === 'light') {
-                    themeIcon.classList.remove('fa-sun');
-                    themeIcon.classList.add('fa-moon');
-                } else {
-                    themeIcon.classList.remove('fa-moon');
-                    themeIcon.classList.add('fa-sun');
-                }
-            }
-
-            // Check for saved theme in localStorage
-            const currentTheme = localStorage.getItem('theme') || 'dark'; // Default to dark
-            setTheme(currentTheme);
-
-            // Toggle on click
-            themeToggle.addEventListener('click', () => {
-                const newTheme = body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-                setTheme(newTheme);
-            });
-
-            // --- 4. Mobile Menu Toggle ---
-            const menuToggle = document.getElementById('menu-toggle');
-            const navLinks = document.getElementById('nav-links');
-            const navLinkItems = document.querySelectorAll('.nav-links li a');
-            const menuIcon = menuToggle.querySelector('i');
-
-            menuToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                
-                if (navLinks.classList.contains('active')) {
-                    menuIcon.classList.remove('fa-bars');
-                    menuIcon.classList.add('fa-times');
-                } else {
-                    menuIcon.classList.remove('fa-times');
-                    menuIcon.classList.add('fa-bars');
-                }
-            });
-
-            // Close menu when a link is clicked
-            navLinkItems.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (navLinks.classList.contains('active')) {
-                        navLinks.classList.remove('active');
-                        menuIcon.classList.remove('fa-times');
-                        menuIcon.classList.add('fa-bars');
-                    }
-                });
-            });
-
-            // --- 5. Bouncy Scroll Animations ---
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.1 // Trigger when 10% of the element is visible
-            });
-
-            const revealElements = document.querySelectorAll('.reveal');
-            revealElements.forEach((el) => observer.observe(el));
-            
-            const revealChildren = document.querySelectorAll('.reveal-child');
-            revealChildren.forEach((el) => observer.observe(el));
-
-
-            // --- 6. Floating Socials Toggle ---
-            const socialToggle = document.getElementById('social-toggle');
-            const socialIconsWrapper = document.getElementById('social-icons-wrapper');
-            const toggleIcon = socialToggle.querySelector('i');
-
-            socialToggle.addEventListener('click', () => {
-                socialIconsWrapper.classList.toggle('active');
-                
-                // Change 3-dot icon to 'close' (X) icon
-                if (socialIconsWrapper.classList.contains('active')) {
-                    toggleIcon.classList.remove('fa-ellipsis-h');
-                    toggleIcon.classList.add('fa-times');
-                } else {
-                    toggleIcon.classList.remove('fa-times');
-                    toggleIcon.classList.add('fa-ellipsis-h');
-                }
-            });
-        });
-    </script>
-
-</body>
-</html>
-
+            .floating-socia
