@@ -31,12 +31,6 @@
             --glass-border: rgba(255, 255, 255, 0.1);
             --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 
-            /* New Intro CTA colors */
-            --cta-bg-color: #7f5af6; /* Purple from your image */
-            --cta-bg-gradient: linear-gradient(135deg, rgba(127, 90, 246, 0.9), rgba(158, 128, 255, 0.8));
-            --cta-noise-color: rgba(255, 255, 255, 0.05); /* subtle noise for texture */
-
-
             /* Bouncy Animation Timing */
             --bounce-cubic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -53,11 +47,6 @@
             --glass-bg: rgba(242, 242, 247, 0.7); /* Light glass */
             --glass-border: rgba(0, 0, 0, 0.1);
             --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-
-            /* New Intro CTA colors for Light Mode */
-            --cta-bg-color: #9d80ff; 
-            --cta-bg-gradient: linear-gradient(135deg, rgba(157, 128, 255, 0.9), rgba(127, 90, 246, 0.8));
-            --cta-noise-color: rgba(0, 0, 0, 0.05); /* subtle noise for texture */
         }
         
         * {
@@ -260,7 +249,6 @@
             padding-top: 70px; /* Offset for fixed header */
         }
         
-        /* UPDATED: Profile Photo Style with Animation */
         .profile-photo {
             width: 150px;
             height: 150px;
@@ -282,93 +270,32 @@
             color: var(--text-color);
             margin-bottom: 0.5rem;
         }
+
+        /* UPDATED: Tagline Style */
         #home .tagline {
             font-size: clamp(1rem, 4vw, 1.5rem);
             color: var(--text-secondary);
             font-weight: 400;
-            margin-bottom: 0.25rem; /* Reduced margin */
+            margin-bottom: 1.5rem; /* Added margin for button */
         }
-
-        /* NEW: Secondary Tagline Style */
-        .tagline-secondary {
-            font-size: clamp(0.9rem, 3vw, 1.1rem);
-            color: var(--text-secondary);
-            font-weight: 300;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        /* --- NEW: Intro Call-to-Action Section Styles --- */
-        #intro-cta {
-            padding: 5rem 0;
-            text-align: center;
-            background-color: var(--cta-bg-color);
-            background-image: var(--cta-bg-gradient), 
-                              repeating-linear-gradient(
-                                0deg,
-                                var(--cta-noise-color),
-                                var(--cta-noise-color) 1px,
-                                transparent 1px,
-                                transparent 2px
-                              ),
-                              repeating-linear-gradient(
-                                90deg,
-                                var(--cta-noise-color),
-                                var(--cta-noise-color) 1px,
-                                transparent 1px,
-                                transparent 2px
-                              ); /* Subtle grid/noise pattern */
-            border-top: 1px solid rgba(255,255,255,0.1);
-            border-bottom: 1px solid rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden; /* For pseudo-elements */
-        }
-
-        /* Optional: Add a subtle wavy pattern if desired, but image-like waves are complex in pure CSS */
-        #intro-cta::before {
-            content: '';
-            position: absolute;
-            bottom: -50px; /* Position below */
-            left: 0;
-            width: 100%;
-            height: 100px; /* Height of the wave */
-            background: rgba(0,0,0,0.1); /* Dark wave */
-            border-radius: 50% / 100px 100px 0 0; /* Creates an upward curve */
-            transform: scaleX(1.5); /* Stretch horizontally */
-            z-index: 1;
-        }
-
-        #intro-cta .container {
-            position: relative;
-            z-index: 2; /* Keep content above waves */
-        }
-
-        #intro-cta h2 {
-            font-size: clamp(2rem, 6vw, 3.5rem); /* Larger, responsive font */
-            color: #fff; /* White text for contrast */
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .cta-button {
+        
+        /* NEW: Hero Learn More Button Style */
+        .hero-button {
             display: inline-block;
-            background: #fff; /* White button */
-            color: var(--cta-bg-color); /* Purple text from cta-bg-color */
-            padding: 0.9rem 2.5rem;
+            background: var(--apple-blue);
+            color: #fff;
+            padding: 0.75rem 2rem;
             border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: 0.5px;
-            transition: transform 0.4s var(--bounce-cubic), box-shadow 0.3s ease, background 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.4s var(--bounce-cubic), box-shadow 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 122, 255, 0.25);
         }
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            background: #f0f0f0; /* Slight change on hover */
-            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        .hero-button:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 122, 255, 0.4);
+            color: #fff;
         }
-        /* --- End Intro Call-to-Action Section Styles --- */
 
 
         /* --- 7. Sections (About, Edu, etc.) --- */
@@ -466,37 +393,36 @@
             color: var(--text-color);
         }
 
-        /* --- 11. Contact Section (MODIFIED) --- */
+        /* --- 11. Contact Section --- */
         #contact {
             text-align: center;
         }
         .contact-info {
             margin: 2rem 0;
-            display: flex; /* Added for alignment */
-            flex-direction: column; /* Stack items vertically */
-            align-items: center; /* Center horizontally */
-            gap: 1rem; /* Space between items */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
         }
-        /* UPDATED: Contact Info Paragraphs */
         .contact-info p {
-            font-size: 1.25rem; /* Made bigger */
-            margin: 0; /* Reset default margin */
-            color: var(--text-color); /* Primary text color */
-            display: flex; /* Allow icon and text to align */
-            align-items: center; /* Vertically align icon and text */
-            gap: 0.75rem; /* Space between icon and text */
-            transition: transform 0.3s var(--bounce-cubic); /* Add animation */
+            font-size: 1.25rem;
+            margin: 0;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: transform 0.3s var(--bounce-cubic);
         }
         .contact-info p:hover {
-            transform: translateY(-3px) scale(1.02); /* Slight lift on hover */
+            transform: translateY(-3px) scale(1.02);
         }
         .contact-info p a {
-            color: var(--apple-blue); /* Ensure link color is applied */
+            color: var(--apple-blue);
             font-weight: 500;
         }
         .contact-info i {
-            font-size: 1.5rem; /* Bigger icons */
-            color: var(--apple-blue-light); /* Highlight icon color */
+            font-size: 1.5rem;
+            color: var(--apple-blue-light);
         }
         
         .contact-buttons {
@@ -641,7 +567,6 @@
             h1 { font-size: 2.5rem; }
             h2 { font-size: 2rem; }
             
-            /* NEW: Mobile Profile Photo */
             .profile-photo {
                 width: 120px;
                 height: 120px;
@@ -657,11 +582,8 @@
                 top: 0;
                 width: 100%;
                 border-radius: 0;
-                
                 left: 0;
                 transform: none;
-                
-                /* Apply glass directly for mobile nav */
                 background: var(--glass-bg);
                 backdrop-filter: blur(20px) saturate(180%);
                 -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -722,15 +644,6 @@
             .contact-info i {
                 font-size: 1.3rem;
             }
-
-            /* Mobile CTA Adjustments */
-            #intro-cta h2 {
-                font-size: 1.8rem;
-            }
-            .cta-button {
-                padding: 0.75rem 2rem;
-                font-size: 1rem;
-            }
         }
         
     </style>
@@ -775,16 +688,13 @@
             <h1 class="name-header reveal" style="transition-delay: 0.3s;">Suryansh</h1>
             
             <p class="tagline reveal" style="transition-delay: 0.5s;">
-                Passionate Civil Engineering Student
+                I'm Civil Engineering Student | Future Site Engineer
             </p>
-            </section>
-
-        <section id="intro-cta">
-            <div class="container reveal">
-                <h2>Specializing in Sustainable Design & AI-Driven Solutions</h2>
-                <a href="#about" class="cta-button">Learn More</a>
-            </div>
+            
+            <a href="#about" class="hero-button reveal" style="transition-delay: 0.7s;">Learn More</a>
         </section>
+
+        
         <section id="about">
             <div class="container">
                 <h2 class="reveal">🧑‍🎓 About Me</h2>
@@ -917,7 +827,7 @@
             <a href="https://wa.me/918957131881" target="_blank" aria-label="WhatsApp" class="social-icon glass-card">
                 <i class="fab fa-whatsapp"></i>
             </a>
-            <a href="https{s://github.com/Suryanshg821}" target="_blank" aria-label="GitHub" class="social-icon glass-card"> 
+            <a href="https://github.com/Suryanshg821" target="_blank" aria-label="GitHub" class="social-icon glass-card"> 
                 <i class="fab fa-github"></i>
             </a>
             <a href="mailto:suryanshg821@gmail.com" aria-label="Email" class="social-icon glass-card">
