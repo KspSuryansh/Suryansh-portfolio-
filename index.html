@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
     <style>
         /* --- 1. Global Styles & Apple Blue Theme --- */
@@ -168,17 +170,18 @@
             transition: opacity 0.3s ease;
         }
 
-        /* --- 5. Header & Navigation --- */
+        /* --- 5. Header & Navigation (FIXED) --- */
         .header {
             position: fixed;
             top: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 95%;
+            left: 2.5%; 
+            right: 2.5%;
+            width: auto;
+            margin: 0 auto;
             max-width: 1100px;
-            z-index: 100;
+            z-index: 1000;
             border-radius: 16px;
-            padding: 0; /* Padding will be on the navbar */
+            padding: 0;
         }
 
         .navbar {
@@ -186,7 +189,6 @@
             justify-content: space-between;
             align-items: center;
             height: 60px;
-            padding: 0 1.5rem;
         }
 
         .nav-logo {
@@ -238,30 +240,44 @@
             cursor: pointer;
         }
 
-        /* --- 6. Home/Hero Section (MODIFIED) --- */
+        /* --- 6. Home/Hero Section --- */
         #home {
             min-height: 100vh;
             display: flex;
-            flex-direction: column; /* Changed to column */
+            flex-direction: column; 
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding-top: 70px; /* Offset for fixed header */
+            padding-top: 70px;
         }
         
+        /* NEW: Floating Animation Keyframes */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+                box-shadow: 0 4px 20px rgba(0, 122, 255, 0.2);
+            }
+            50% {
+                transform: translateY(-8px); /* Float up */
+                box-shadow: 0 12px 25px rgba(0, 122, 255, 0.3); /* Bigger shadow */
+            }
+        }
+        
+        /* UPDATED: Profile Photo with Animation */
         .profile-photo {
             width: 150px;
             height: 150px;
-            border-radius: 50%; /* Makes it circular */
-            object-fit: cover; /* Keeps image aspect ratio */
+            border-radius: 50%;
+            object-fit: cover;
             margin-bottom: 1.5rem;
             border: 3px solid var(--apple-blue-light);
-            box-shadow: 0 4px 20px rgba(0, 122, 255, 0.2);
-            transition: transform 0.4s var(--bounce-cubic), box-shadow 0.3s ease; /* Added transition */
+            /* NEW: Added Animation */
+            animation: float 4s ease-in-out infinite;
+            transition: transform 0.4s var(--bounce-cubic);
         }
         .profile-photo:hover {
-            transform: scale(1.08); /* Slightly larger on hover */
-            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4);
+            transform: scale(1.08);
+            animation-play-state: paused; /* Pause animation on hover */
         }
 
         #home .name-header {
@@ -271,15 +287,13 @@
             margin-bottom: 0.5rem;
         }
 
-        /* UPDATED: Tagline Style */
         #home .tagline {
             font-size: clamp(1rem, 4vw, 1.5rem);
             color: var(--text-secondary);
             font-weight: 400;
-            margin-bottom: 1.5rem; /* Added margin for button */
+            margin-bottom: 1.5rem;
         }
         
-        /* NEW: Hero Learn More Button Style */
         .hero-button {
             display: inline-block;
             background: var(--apple-blue);
@@ -290,11 +304,22 @@
             font-size: 1rem;
             transition: transform 0.4s var(--bounce-cubic), box-shadow 0.3s ease;
             box-shadow: 0 8px 20px rgba(0, 122, 255, 0.25);
+            animation: pulse-bounce 2.5s infinite;
         }
         .hero-button:hover {
             transform: translateY(-4px) scale(1.05);
             box-shadow: 0 12px 30px rgba(0, 122, 255, 0.4);
             color: #fff;
+            animation-play-state: paused;
+        }
+
+        @keyframes pulse-bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
         }
 
 
@@ -342,28 +367,37 @@
         /* --- 9. Projects Section --- */
         .project-grid {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
-        .project-card {
-            overflow: hidden;
-            padding: 0; /* Remove padding for image */
+
+        .project-link-card {
+            display: block;
+            text-decoration: none;
+            color: var(--text-color);
+            text-align: center;
+            padding: 2.5rem 2rem;
         }
-        .project-card img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-bottom: 1px solid var(--glass-border);
+        .project-link-card i {
+            font-size: 4rem;
+            color: var(--apple-blue-light);
+            margin-bottom: 1.5rem;
+            transition: transform 0.4s var(--bounce-cubic);
         }
-        .project-info {
-            padding: 1.5rem;
-        }
-        .project-info h3 {
+        .project-link-card h3 {
             font-size: 1.5rem;
-            color: var(--apple-blue);
+            color: var(--text-color);
+            margin: 0;
         }
+        .project-link-card:hover {
+            color: var(--text-color);
+        }
+        .project-link-card:hover i {
+            transform: scale(1.15) rotate(5deg);
+        }
+
 
         /* --- 10. Habits Section --- */
         .habits-list {
@@ -583,7 +617,10 @@
                 width: 100%;
                 border-radius: 0;
                 left: 0;
+                right: 0;
                 transform: none;
+                width: 100%;
+                margin: 0;
                 background: var(--glass-bg);
                 backdrop-filter: blur(20px) saturate(180%);
                 -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -643,6 +680,20 @@
             }
             .contact-info i {
                 font-size: 1.3rem;
+            }
+
+            /* Mobile Project Grid */
+            .project-grid {
+                grid-template-columns: 1fr; /* Stack on mobile */
+            }
+            .project-link-card {
+                padding: 2rem;
+            }
+            .project-link-card i {
+                font-size: 3rem;
+            }
+            .project-link-card h3 {
+                font-size: 1.25rem;
             }
         }
         
@@ -749,20 +800,19 @@
 
         <section id="projects">
             <div class="container">
-                <h2 class="reveal">🏗️ Projects</h2>
+                <h2 class="reveal">🏗️ My Work</h2>
                 <div class="project-grid reveal" style="transition-delay: 0.2s;">
                     
-                    <div class="project-card glass-card reveal-child" style="--child-index: 1;">
-                        <img src="https://drive.google.com/file/d/1C3GR7J7xoSJfer_rfgZWhHG3AWACsER5/view?usp=drivesdk" alt="2D House Design">
-                        <div class="project-info">
-                            <h3>2D House Design</h3>
-                            <p>
-                                A residential house plan designed in AutoCAD. This project involved creating detailed 2D floor plans,
-                                which were then visualized with 3D modeling and rendering techniques.
-                            </p>
-                        </div>
-                    </div>
+                    <a href="https://drive.google.com/file/d/1C3GR7J7xoSJfer_rfgZWhHG3AWACsER5/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="glass-card project-link-card reveal-child" style="--child-index: 1;">
+                        <i class="fas fa-drafting-compass"></i>
+                        <h3>AutoCAD Projects</h3>
+                    </a>
                     
+                    <a href="https://1drv.ms/x/c/EBE9AC2178FF98A7/EbF5zJYcnLxNpccEc-1N0g4B5vDuYAVg3z1j-OOd583tww?e=85I6LI" target="_blank" rel="noopener noreferrer" class="glass-card project-link-card reveal-child" style="--child-index: 2;">
+                        <i class="fas fa-file-excel"></i>
+                        <h3>MS Excel Projects</h3>
+                    </a>
+
                 </div>
             </div>
         </section>
@@ -796,7 +846,7 @@
                     <a href="mailto:suryanshg821@gmail.com" class="btn">
                         <i class="fas fa-envelope"></i> Get In Touch
                     </a>
-                    <a href="https://wa.me/918957131881" class="btn btn-whatsapp" target="_blank">
+                    <a href="https://wa.me/918957131881" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-whatsapp"></i> WhatsApp Me
                     </a>
                 </div>
@@ -818,16 +868,16 @@
     
     <div class="floating-socials-container">
         <div class="social-icons-wrapper" id="social-icons-wrapper">
-            <a href="https://www.instagram.com/ksp_suryansh?igsh=MWJsY3Q3M2Q4Y3U0OA==" target="_blank" aria-label="Instagram" class="social-icon glass-card">
+            <a href="https://www.instagram.com/ksp_suryansh?igsh=MWJsY3Q3M2Q4Y3U0OA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon glass-card">
                 <i class="fab fa-instagram"></i>
             </a>
-            <a href="https://x.com/KasyapSuryansh?t=fKRkFBuJ7GGx3rS1v9aj7A&s=09" target="_blank" aria-label="Twitter" class="social-icon glass-card">
+            <a href="httpsD://x.com/KasyapSuryansh?t=fKRkFBuJ7GGx3rS1v9aj7A&s=09" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-icon glass-card">
                 <i class="fab fa-x-twitter"></i>
             </a>
-            <a href="https://wa.me/918957131881" target="_blank" aria-label="WhatsApp" class="social-icon glass-card">
+            <a href="https://wa.me/918957131881" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-icon glass-card">
                 <i class="fab fa-whatsapp"></i>
             </a>
-            <a href="https://github.com/Suryanshg821" target="_blank" aria-label="GitHub" class="social-icon glass-card"> 
+            <a href="https://github.com/Suryanshg821" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon glass-card"> 
                 <i class="fab fa-github"></i>
             </a>
             <a href="mailto:suryanshg821@gmail.com" aria-label="Email" class="social-icon glass-card">
@@ -955,9 +1005,19 @@
                     toggleIcon.classList.add('fa-ellipsis-h');
                 }
             });
+
+            // --- 7. NEW: Lenis Smooth Scroll ---
+            const lenis = new Lenis();
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+
+            requestAnimationFrame(raf);
+            
         });
     </script>
 
 </body>
 </html>
-
